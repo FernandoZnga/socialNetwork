@@ -23,7 +23,7 @@
                 <div class="col-md-6">
                     <div class="form-login">
                         <h4>Ingresa tu usuario y contraseña</h4>
-                        <form name="formLogin" action="home.jsp?projectList=1" method="POST">
+                        <form name="formLogin" action="home.jsp?projectsList=1" method="POST">
                             <input type="text" id="username" name="username" class="form-control input-sm chat-input text-uppercase" placeholder="USUARIO" required/>
                             <br>
                             <input type="password" id="password" name="password" class="form-control input-sm chat-input" placeholder="CONTRASEÑA" required/>
