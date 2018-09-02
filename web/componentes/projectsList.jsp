@@ -5,7 +5,7 @@
 --%>
 
 <%
-    if (request.getParameter("projectList") != null) {
+    if (request.getParameter("projectsList") != null) {
         if (request.getParameter("friendProjectList") != null) {
 %>
 <div class="container">

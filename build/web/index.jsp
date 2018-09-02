@@ -16,10 +16,13 @@
     </head>
     <body>
         <div class="container">
+            <h2>Red Social, Bienvenido</h2>
+        </div>
+        <div class="container">
             <div class="row">
-                <div class="col-md-offset-2 col-md-3">
+                <div class="col-md-6">
                     <div class="form-login">
-                        <h4>Login</h4>
+                        <h4>Ingresa tu usuario y contraseña</h4>
                         <form name="formLogin" action="home.jsp?projectList=1" method="POST">
                             <input type="text" id="username" name="username" class="form-control input-sm chat-input text-uppercase" placeholder="USUARIO" required/>
                             <br>
@@ -27,7 +30,7 @@
                             <br>
                             <div class="wrapper">
                                 <span class="group-btn">     
-                                    <input class="btn btn-primary btn-md" type="submit" value="login" name="btLogin" />
+                                    <input class="btn btn-primary btn-md" type="submit" value="Login" name="btLogin" />
                                     <a href="newUserPage.jsp"> Eres nuevo? Click aqui</a>
                                 </span>
                             </div>

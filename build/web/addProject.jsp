@@ -33,13 +33,13 @@
     </head>
     <body>
         <jsp:include page="/componentes/navbar.jsp" />
-        <br>
+        <div class="container">
+            <h2>Datos Generales del Proyecto</h2>
+        </div>
         <div class="container">
             <form role="form" method="POST" action="home.jsp?projectList=1&message=201" id="frNewProject">
                 <div class="row">
                     <fieldset>
-                        <legend>Datos del Proyecto</legend>
-
                         <div class="col-sm-6">
                             <label for="projectName">Nombre</label>
                             <input type="text" class="form-control" name="projectName" id="projectName" placeholder="ingrese el nombre del proyecto" required>

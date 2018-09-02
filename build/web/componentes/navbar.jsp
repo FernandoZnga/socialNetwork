@@ -30,7 +30,7 @@
                     Proyectos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="home.jsp?projectList=1">Mis Proyectos</a>
+                    <a class="dropdown-item" href="home.jsp?projectsList=1">Mis Proyectos</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="addProject.jsp">Agregar Nuevo</a>
                 </div>

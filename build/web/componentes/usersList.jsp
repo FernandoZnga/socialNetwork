@@ -8,6 +8,9 @@
     if (request.getParameter("usersList") != null) {
 %>
 <div class="container">
+    <h2>Lista de Usuarios del Sistema</h2>
+</div>
+<div class="container">
     <div class="">
         <table class="table table-hover">
             <thead>
@@ -56,7 +59,6 @@
         </table>
     </div>
 </div>
-
 <%
     }
 %>

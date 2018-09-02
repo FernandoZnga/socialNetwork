@@ -27,11 +27,12 @@
         <%
             }
         %>
+        <div class="container">
+            <h2>Nuevo Usuario</h2>
+        </div>
         <form name="formNewUser" action="index.jsp" method="POST">
-            <legend class="text-center">Area de Registro</legend>
             <div class="container">
                 <fieldset>
-                    <legend>Datos de Usuario</legend>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="firstName">Nombre</label>
