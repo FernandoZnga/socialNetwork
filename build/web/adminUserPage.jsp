@@ -38,7 +38,7 @@
             <h2>Editar Usuario</h2>
         </div>
 
-        <form name="formEditUser" action="adminUser.jsp?usernameid=<%=request.getParameter("unameid")%>" method="POST">
+        <form name="formEditUser" action="adminUser.jsp?usernameid=abcr" method="POST">
             <div class="container">
                 <fieldset>
                     <div class="row">
