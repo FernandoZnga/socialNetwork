@@ -4,13 +4,24 @@
     Author     : fernando
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="database.Dba"%>
 <%
-    if (request.getParameter("usersList") != null) {
+    try {
+
+        if (request.getParameter("usersList") != null) {
+            int row_number = 1;
+            Dba db = new Dba();
+            db.conectar();
+            String qry;
+            qry = "SELECT * FROM vw_users";
+            db.query.execute(qry);
+            ResultSet rs = db.query.getResultSet();
 %>
 <div class="container">
     <h2>Lista de Usuarios del Sistema</h2>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="">
         <table class="table table-hover">
             <thead>
@@ -22,43 +33,50 @@
                     <th scope="col">Email</th>
                     <th scope="col">País</th>
                     <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Tipo Usuario</th>
+                    <th scope="col">Status Usuario</th>
+                    <th scope="col">Acción</th>
                 </tr>
             </thead>
             <tbody>
+                <%
+                    while (rs.next()) {
+                %>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>MOTTO</td>
-                    <td>motto@mail.com</td>
-                    <td>Honduras</td>
-                    <td>01-05-1980</td>
-                    <td><a class="btn btn-outline-info btn-sm" href="#" role="button">Ver</a></td>
+                    <th scope="row"><%out.print(row_number++);%></th>
+                    <td class="text-capitalize"><%=rs.getString(4)%></td>
+                    <td class="text-capitalize"><%=rs.getString(5)%></td>
+                    <td><%=rs.getString(2)%></td>
+                    <td><%=rs.getString(6)%></td>
+                    <td><%=rs.getString(8)%></td>
+                    <td><%=rs.getString(7)%></td>
+                    <td><%=rs.getString(13)%></td>
+                    <td><%=rs.getString(11)%></td>
+                    <%
+                        if (session.getAttribute("s_username").equals(rs.getString(2))) {
+                    %>
+                    <td><a class="btn btn-outline-info btn-sm" href="adminUserPage.jsp?unameid=<%=rs.getString(1)%>&country=<%=rs.getString(8)%>&ustatusid=<%=rs.getString(10)%>&utypeid=<%=rs.getString(12)%>" hidden role="button">Editar</a></td>
+                    <%
+                    } else {
+                    %>
+                    <td><a class="btn btn-outline-info btn-sm" href="adminUserPage.jsp?unameid=<%=rs.getString(1)%>&country=<%=rs.getString(8)%>&ustatusid=<%=rs.getString(10)%>&utypeid=<%=rs.getString(12)%>" role="button">Editar</a></td>
+                    <%
+                        }
+                    %>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>JTHORTON</td>
-                    <td>jthorton@mail.com</td>
-                    <td>Honduras</td>
-                    <td>09-08-1990</td>
-                    <td><a class="btn btn-outline-info btn-sm" href="#" role="button">Ver</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry the Bird</td>
-                    <td>On the air</td>
-                    <td>LARRYFLY</td>
-                    <td>fly@mail.com</td>
-                    <td>Honduras</td>
-                    <td>10-02-1995</td>
-                    <td><a class="btn btn-outline-info btn-sm" href="#" role="button">Ver</a></td>
-                </tr>
+                <%
+                    }
+                    db.desconectar();
+                %>
             </tbody>
         </table>
     </div>
 </div>
 <%
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        out.print(e);
+        request.getRequestDispatcher("home.jsp?usersList=1&message=502").forward(request, response);
     }
 %>

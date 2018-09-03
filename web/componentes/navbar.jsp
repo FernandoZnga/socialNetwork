@@ -22,7 +22,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="home.jsp?usersList=1">Listar Cuentas de Usuarios</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="newUserPage.jsp?editUser=1">Crear Usuario</a>
+                    <a class="dropdown-item" href="adminUserPage.jsp?createUser=1">Crear Usuario</a>
                 </div>
             </li>
             <li class="nav-item dropdown active">
@@ -61,7 +61,7 @@
                 <a class="nav-link" href="#">Mi Cuenta <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.jsp">Salir <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.jsp?logout=1">Salir <span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>

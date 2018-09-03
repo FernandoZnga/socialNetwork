@@ -20,28 +20,24 @@
 
     </head>
     <body>
-        <%
-            if (request.getParameter("editUser") != null) {
-        %>
-        <jsp:include page="componentes/navbar.jsp" />
-        <%
-            }
-        %>
         <div class="container">
             <h2>Nuevo Usuario</h2>
         </div>
-        <form name="formNewUser" action="index.jsp" method="POST">
+        <form name="formNewUser" action="newUser.jsp" method="POST">
             <div class="container">
                 <fieldset>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="firstName">Nombre</label>
-                            <input type="text" class="form-control text-capitalize" name="firstName" id="firstName" placeholder="ingrese nombre" required>
+                            <label for="firstname">Nombre</label>
+                            <input type="text" class="form-control text-capitalize" name="firstname" id="firstName" placeholder="ingrese nombre" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="lastName">Apellido</label>
-                            <input type="text" class="form-control text-capitalize" name="lastName" id="lastName" placeholder="ingrese apellido" required>
+                            <label for="lastname">Apellido</label>
+                            <input type="text" class="form-control text-capitalize" name="lastname" id="lastName" placeholder="ingrese apellido" required>
                         </div>
+                    </div>
+                    <br>
+                    <div class="row">
                         <div class="col-md-6">
                             <label for="username">Nombre de usuario</label>
                             <input type="text" class="form-control text-uppercase" name="username" id="username" placeholder="usuario" required>
@@ -50,6 +46,9 @@
                             <label for="email">Email</label>
                             <input type="email" class="form-control text-lowercase" name="email" id="email" placeholder="ex: nombre@mail.com" required>
                         </div>
+                    </div>
+                    <br>
+                    <div class="row">
                         <div class="col-md-6">
                             <label for="1password">Contrasena</label>
                             <input type="password" class="form-control" name="1password" id="1password" placeholder="ingrese contraseña" required onkeyup='checkPass();'>
@@ -58,6 +57,9 @@
                             <label for="2password">Confirmar contrasena</label><span id='message'></span>
                             <input type="password" class="form-control" name="2password" id="2password" placeholder="confirme contraseña" required onkeyup='checkPass();'>
                         </div>
+                    </div>
+                    <br>
+                    <div class="row">
                         <div class="col-md-6">
                             <label for="country">Seleccione su país</label>
                             <select class="form-control text-capitalize" name="dropCountry" required>
@@ -78,19 +80,8 @@
                 <br>
                 <div>
                     <div class="col-md-12">
-                        <%
-                            if (request.getParameter("editUser") != null) {
-                        %>
-                        <input type="submit" value="Crear Cuenta" name="btRegistrar" disabled id="btRegistrar" class="btn btn-primary"/>
-                        <%
-                        } else {
-                        %>
                         <input type="submit" value="Crear Cuenta" name="btRegistrar" disabled id="btRegistrar" class="btn btn-primary"/>
                         <a href="index.jsp">Ya tienes una cuenta?</a>
-                        <%
-                            }
-                        %>
-
                     </div>
                 </div>
             </div>
@@ -108,7 +99,7 @@
                 } else {
                     document.getElementById('message').style.color = 'red';
                     document.getElementById('message').innerHTML = ' No concuerda';
-                    document.getElementById('btSubmit').disabled = true;
+                    document.getElementById('btRegistrar').disabled = true;
                 }
             };
         </script>

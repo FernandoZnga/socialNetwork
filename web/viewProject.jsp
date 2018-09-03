@@ -31,6 +31,7 @@
         </script>
     </head>
     <body>
+        <jsp:include page="componentes/secure.jsp" />
         <jsp:include page="componentes/navbar.jsp" />
         <br></br>
         <div class="container-fluid">

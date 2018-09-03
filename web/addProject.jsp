@@ -32,6 +32,7 @@
         </script>
     </head>
     <body>
+        <jsp:include page="componentes/secure.jsp" />
         <jsp:include page="/componentes/navbar.jsp" />
         <div class="container">
             <h2>Datos Generales del Proyecto</h2>
