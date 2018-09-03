@@ -59,7 +59,9 @@
                     <%
                     } else {
                     %>
-                    <td><a class="btn btn-outline-info btn-sm" href="adminUserPage.jsp?unameid=<%=rs.getString(1)%>&country=<%=rs.getString(8)%>&ustatusid=<%=rs.getString(10)%>&utypeid=<%=rs.getString(12)%>" role="button">Editar</a></td>
+                    <!--<td><a class="btn btn-outline-info btn-sm" href="adminUserPage.jsp?unameid=<%=rs.getString(1)%>&country=<%=rs.getString(8)%>&ustatusid=<%=rs.getString(10)%>&utypeid=<%=rs.getString(12)%>" role="button">Editar</a></td>-->
+                    <td><a class="btn btn-outline-info btn-sm" href="adminUserPage.jsp?unameid=<%=rs.getString(1)%>" role="button">Editar</a></td>
+
                     <%
                         }
                     %>

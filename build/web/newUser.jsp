@@ -26,7 +26,11 @@
             out.print(qry);
             db.query.execute(qry);
             db.desconectar();
-            request.getRequestDispatcher("index.jsp?message=202").forward(request, response);
+            if (session.getAttribute("s_token") != null) {
+                request.getRequestDispatcher("home.jsp?usersList=1&message=202").forward(request, response);
+            } else {
+                request.getRequestDispatcher("index.jsp?message=202").forward(request, response);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             out.print(e);

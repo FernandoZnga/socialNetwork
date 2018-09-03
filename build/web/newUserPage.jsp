@@ -20,6 +20,15 @@
 
     </head>
     <body>
+        <%
+            if (request.getParameter("createUser") != null) {
+        %>
+        <jsp:include page="componentes/secure.jsp" />
+        <jsp:include page="componentes/navbar.jsp" />
+        <%
+            }
+
+        %>
         <div class="container">
             <h2>Nuevo Usuario</h2>
         </div>
@@ -81,7 +90,18 @@
                 <div>
                     <div class="col-md-12">
                         <input type="submit" value="Crear Cuenta" name="btRegistrar" disabled id="btRegistrar" class="btn btn-primary"/>
+                        <%    if (request.getParameter("createUser") != null) {
+                        %>
+                        <a href="home.jsp?usersList=1">Cancelar</a>
+                        <%
+                        } else {
+                        %>
                         <a href="index.jsp">Ya tienes una cuenta?</a>
+
+                        <%
+                            }
+
+                        %>
                     </div>
                 </div>
             </div>

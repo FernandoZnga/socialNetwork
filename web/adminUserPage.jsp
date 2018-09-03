@@ -33,12 +33,15 @@
                     db.query.execute(qry);
                     ResultSet rs = db.query.getResultSet();
                     while (rs.next()) {
+                        request.setAttribute("ucountry", rs.getString(8));
+                        request.setAttribute("utypeid", rs.getString(12));
+                        request.setAttribute("ustatusid", rs.getString(10));
         %>
+
         <div class="container">
             <h2>Editar Usuario</h2>
         </div>
-
-        <form name="formEditUser" action="adminUser.jsp?usernameid=abcr" method="POST">
+        <form name="formNewUser" action="adminUser.jsp?unameid=<%=request.getParameter("unameid")%>" method="POST">
             <div class="container">
                 <fieldset>
                     <div class="row">
@@ -55,7 +58,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="username">Nombre de usuario</label>
-                            <input type="text" class="form-control text-uppercase" name="username" id="username" placeholder="usuario" value="<%=rs.getString(2)%>" disabled required>
+                            <input type="text" class="form-control text-lowercase" name="username" id="username" placeholder="usuario" value="<%=rs.getString(2)%>" required>
                         </div>
                         <div class="col-md-6">
                             <label for="email">Email</label>
@@ -63,28 +66,19 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row" hidden>
-                        <div class="col-md-6">
-                            <label for="1password">Contrasena</label>
-                            <input type="password" class="form-control" name="1password" id="1password" placeholder="ingrese contraseña" onkeyup='checkPass();'>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="2password">Confirmar contrasena</label><span id='message'></span>
-                            <input type="password" class="form-control" name="2password" id="2password" placeholder="confirme contraseña" onkeyup='checkPass();'>
-                        </div>
-                    </div>
-                    <div class="row" hidden>
-                        <div class="col-md-6">
-                            <label for="dateOfBirth">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="ingrese su fecha de nacimiento" value="<%=rs.getString(7)%>" required>
-                        </div>
-                    </div>
-                    <%
-                        }
-                    %>
-                    <br>
-
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="dateOfBirth">Fecha Nacimiento</label>
+                                    <input type="text" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="ingrese su fecha de nacimiento" value="<%=rs.getString(7)%>" disabled>
+                                </div>
+                            </div>
+                            <!--<label for="dateOfBirth">Fecha de nacimiento</label>-->
+                        </div>
+                        <%
+                            }
+                        %>
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -99,7 +93,7 @@
                                         ResultSet rs1 = db.query.getResultSet();
                                         while (rs1.next()) {
                                             out.println(rs1.getString(1));
-                                            if (request.getParameter("country").equals(rs1.getString(1))) {
+                                            if (request.getAttribute("ucountry").equals(rs1.getString(1))) {
                                     %>
                                     <option value="<%=rs1.getString(1)%>" selected><%=rs1.getString(1)%></option>
                                     <%
@@ -114,7 +108,23 @@
                             </div>
                         </div>
                     </div>
-
+                    <br>
+                    <%
+                        if (request.getParameter("myAccount") != null) {
+                    %>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="1password">Contrasena</label>
+                            <input type="password" class="form-control" name="1password" id="1password" placeholder="ingrese contraseña" required onkeyup='checkPass();'>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="2password">Confirmar contrasena</label><span id='message'></span>
+                            <input type="password" class="form-control" name="2password" id="2password" placeholder="confirme contraseña" required onkeyup='checkPass();'>
+                        </div>
+                    </div>
+                    <%
+                    } else {
+                    %>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group mb-3">
@@ -130,7 +140,7 @@
                                         ResultSet rs2 = db.query.getResultSet();
                                         while (rs2.next()) {
                                             out.println(rs2.getString(1));
-                                            if (request.getParameter("ustatusid").equals(rs2.getString(1))) {
+                                            if (request.getAttribute("ustatusid").equals(rs2.getString(1))) {
                                     %>
                                     <option value="<%=rs2.getString(1)%>" selected><%=rs2.getString(2)%></option>
                                     <%
@@ -144,8 +154,6 @@
                                 </select>
                             </div>
                         </div>
-                        <!--                    </div>
-                                            <div class="row">-->
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -159,7 +167,7 @@
                                         db.query.execute(qry3);
                                         ResultSet rs3 = db.query.getResultSet();
                                         while (rs3.next()) {
-                                            if (request.getParameter("utypeid").equals(rs3.getString(1))) {
+                                            if (request.getAttribute("utypeid").equals(rs3.getString(1))) {
                                     %>
                                     <option value="<%=rs3.getString(1)%>" selected><%=rs3.getString(2)%></option>
                                     <%
@@ -175,33 +183,58 @@
                         </div>
                     </div>
                     <%
-                                db.desconectar();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                out.print(e);
-                                request.getRequestDispatcher("home.jsp?usersList=1&message=502").forward(request, response);
-                            }
                         }
                     %>
                 </fieldset>
                 <br>
                 <div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <input type="submit" value="Editar Cuenta" name="btEditar" id="btEditar" class="btn btn-primary"/>
-                                <a href="home.jsp?usersList=1">Cancelar</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <!--<input type="submit" value="Eliminar Cuenta" name="btEliminar" id="btEditar" class="btn btn-danger"/>-->
-                            </div>
-                        </div>
+                    <div class="col-md-12">
+                        <%
+                            if (request.getParameter("myAccount") != null) {
+                        %>
+                        <input type="submit" value="Editar Cuenta" name="btEditar" id="btEditar" class="btn btn-primary"/>
+                        <a href="home.jsp?projectsList=1">Cancelar</a>
+                        <%
+                        } else {
+                        %>
+                        <input type="submit" value="Editar Cuenta" name="btEditar" id="btEditar" class="btn btn-primary"/>
+                        <a href="home.jsp?usersList=1">Cancelar</a>
+                        <input type="submit" value="Eliminar Cuenta" name="btEliminar" id="btEliminar" class="btn btn-danger"/>
+
+                        <%
+                            }
+                        %>
+
+
                     </div>
                 </div>
             </div>
         </form>
-
-
+        <%
+                    db.desconectar();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    out.print(e);
+                    request.getRequestDispatcher("home.jsp?usersList=1&message=502").forward(request, response);
+                }
+            }
+        %>
+        <script>
+            var checkPass = function () {
+                if (document.getElementById('1password').value ===
+                        document.getElementById('2password').value) {
+                    if (document.getElementById('1password').value !== "") {
+                        document.getElementById('message').style.color = 'green';
+                        document.getElementById('message').innerHTML = ' Concuerda';
+                        document.getElementById('btEditar').disabled = false;
+                    }
+                } else {
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = ' No concuerda';
+                    document.getElementById('btEditar').disabled = true;
+                }
+            };
+        </script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
