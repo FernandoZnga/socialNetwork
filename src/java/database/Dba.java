@@ -20,7 +20,8 @@ public class Dba {
     public void conectar() {
 
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+//            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("oracle.jdbc.OracleDriver");
             String driver = "jdbc:oracle:thin:@";
             base_datos = "142.93.245.77:49161:XE";
             dbcon = DriverManager.getConnection(driver + base_datos, "app", "app");

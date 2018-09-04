@@ -15,6 +15,7 @@
             qry = "CALL pr_insert_usernames('"
                     + request.getParameter("username") + "','"
                     + request.getParameter("1password") + "')";
+            out.println(qry);
             db.query.execute(qry);
             qry = "CALL pr_insert_users('"
                     + request.getParameter("username")
