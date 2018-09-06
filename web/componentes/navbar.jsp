@@ -51,6 +51,8 @@
                     <a class="dropdown-item" href="home.jsp?friendsList=1">Mis Amigos</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="home.jsp?searchFriend=1">Buscar Amigo</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="home.jsp?searchFriend=1">Solicitudes de Amistad</a>
                 </div>
             </li>
             <li class="nav-item dropdown active">
