@@ -47,6 +47,16 @@
 </div>
 <%
         }
+        if (request.getParameter("message").equals("205")) {
+%>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Exito!</strong> Solicitud de amistad enviada satisfactoriamente.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<%
+        }
         if (request.getParameter("message").equals("501")) {
 %>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">

@@ -18,6 +18,7 @@
                     + "valid_user_pass "
                     + "FROM dual";
             db.query.execute(qry);
+            out.println(qry);
             ResultSet rs = db.query.getResultSet();
             while (rs.next()) {
                 if (rs.getString(1).equals("1")) {
@@ -26,6 +27,7 @@
                             + request.getParameter("username") + "') userstatus "
                             + "FROM dual";
                     db.query.execute(qry);
+                    out.println(qry);
                     ResultSet rs1 = db.query.getResultSet();
                     while (rs1.next()) {
                         if (rs1.getString(1).equals("ACTIVE")) {
@@ -40,16 +42,18 @@
                             + request.getParameter("username") + "') usernameid "
                             + "FROM dual";
                     db.query.execute(qry);
+                    out.println(qry);
                     ResultSet rs3 = db.query.getResultSet();
                     while (rs3.next()) {
                         session.setAttribute("s_usernameid", rs3.getString(1));
                         break;
                     }
-                    
+
                     qry = "SELECT fnc_retrieve_usertype('"
                             + request.getParameter("username") + "') usertype "
                             + "FROM dual";
                     db.query.execute(qry);
+                    out.println(qry);
                     ResultSet rs5 = db.query.getResultSet();
                     while (rs5.next()) {
                         session.setAttribute("s_usertype", rs5.getString(1));
@@ -59,10 +63,12 @@
                     qry = "CALL pr_insert_usertokens('"
                             + request.getParameter("username") + "')";
                     db.query.execute(qry);
+                    out.println(qry);
                     qry = "SELECT fnc_retrieve_token('"
                             + request.getParameter("username") + "') token "
                             + "FROM dual";
                     db.query.execute(qry);
+                    out.println(qry);
                     ResultSet rs2 = db.query.getResultSet();
                     while (rs2.next()) {
                         session.setAttribute("s_token", rs2.getString(1));
@@ -80,7 +86,7 @@
         } catch (Exception e) {
             e.printStackTrace();
             out.print(e);
-            request.getRequestDispatcher("index.jsp?message=502").forward(request, response);
+            //request.getRequestDispatcher("index.jsp?message=502").forward(request, response);
         }
     }
 %>

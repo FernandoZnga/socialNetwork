@@ -4,8 +4,17 @@
     Author     : fernando
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="database.Dba"%>
 <%
     if (request.getParameter("searchFriend") != null) {
+        try {
+            Dba db = new Dba();
+            db.conectar();
+            String qry;
+            qry = "SELECT * FROM vw_users WHERE usernameid <> '" + session.getAttribute("s_usernameid") + "'";
+            db.query.execute(qry);
+            ResultSet rs = db.query.getResultSet();
 %>
 <br>
 <div class="container">
@@ -18,75 +27,33 @@
 <div class="container">
     <div class="row">
         <div class="card-deck">
-            <div class="col-sm-3">
+            <%
+                while(rs.next()) {     
+            %>
+            <div class="col-sm-4">
                 <div class="card">
-                    <img class="card-img-top" src="https://robohash.org/find" alt="Card image cap">
+                    <img class="card-img-top" src="https://robohash.org/<%=rs.getString(1)%>" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button type="button" class="btn btn-success btn-sm btn-block">Agregar Amigo</button>
+                        <h5 class="card-title"><%=rs.getString(4)%> <%=rs.getString(5)%> </h5>
+                        <p class="card-text">Email: <%=rs.getString(6)%></p>
+                        <p class="card-text">Fecha Nac: <%=rs.getString(6)%></p>
+                        <p class="card-text">Pais: <%=rs.getString(6)%></p>
+                        <p class="card-text"><small class="text-muted">Es usuario desde <%=rs.getString(9)%></small></p>
+                        <a href="friendRequest.jsp?friend=<%=rs.getString(3)%>&addFriend=1" class="btn btn-success btn-sm btn-block">Agregar Amigo</a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <img class="card-img-top" src="https://robohash.org/text" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button type="button" class="btn btn-success btn-sm btn-block">Agregar Amigo</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <img class="card-img-top" src="https://robohash.org/new" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button type="button" class="btn btn-success btn-sm btn-block">Agregar Amigo</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <img class="card-img-top" src="https://robohash.org/other" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button type="button" class="btn btn-success btn-sm btn-block">Agregar Amigo</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <img class="card-img-top" src="https://robohash.org/random" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button type="button" class="btn btn-success btn-sm btn-block">Agregar Amigo</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <img class="card-img-top" src="https://robohash.org/window" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button type="button" class="btn btn-success btn-sm btn-block">Agregar Amigo</button>
-                    </div>
-                </div>
-            </div>
+            <%
+                }
+                db.desconectar();
+            %>
         </div>
     </div>
 </div>
-<%
+<%        } catch (Exception e) {
+            e.printStackTrace();
+            out.print(e);
+            request.getRequestDispatcher("home.jsp?usersList=1&message=502").forward(request, response);
+        }
     }
 %>

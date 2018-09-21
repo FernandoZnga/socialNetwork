@@ -7,9 +7,8 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="database.Dba"%>
 <%
-    try {
-
-        if (request.getParameter("usersList") != null) {
+    if (request.getParameter("usersList") != null) {
+        try {
             int row_number = 1;
             Dba db = new Dba();
             db.conectar();
@@ -75,10 +74,10 @@
     </div>
 </div>
 <%
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.print(e);
+            request.getRequestDispatcher("home.jsp?usersList=1&message=502").forward(request, response);
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        out.print(e);
-        request.getRequestDispatcher("home.jsp?usersList=1&message=502").forward(request, response);
     }
 %>

@@ -25,6 +25,7 @@
         <jsp:include page="componentes/projectsList.jsp" />
         <jsp:include page="componentes/friendsList.jsp" />
         <jsp:include page="componentes/searchFriend.jsp" />
+        <jsp:include page="componentes/friendRequest.jsp" />
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
